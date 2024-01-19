@@ -1,0 +1,101 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+
+<div class="row">
+  <div class="col-md-4 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+              Information
+          </div>
+          <div class="card-body">
+              <marquee behavior="" direction="">
+                  <h3 class="my-4">New Northern Mindanao Colleges Inc.</h3>
+              </marquee>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-8 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+            Question and Answer details
+          </div>
+          <div class="card-body">
+            <strong><h5>COUNT</h5> </strong>
+              <div class="row">
+                <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          
+                          <th>Course</th>
+                 
+                          <th>Count</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      
+  
+  
+                      {% for c in course %}
+                      <tr>
+                          
+                          <td>{{c.course}}</td>
+                        
+                          <td>{{c.count}}</td>
+    
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+
+
+              </table>
+              </div>
+          </div>
+
+          <br>
+          <div class="card-body">
+            <strong><h5>RATE</h5></strong>
+              <div class="row">
+                <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          
+                      
+                          <th>Year Level</th>
+                          <th>Rate</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      
+  
+  
+                      {% for l in level %}
+                      <tr>
+                          
+                          
+                          <td>{{l.year_level}}</td>
+                          <td>{{l.count}}</td>
+    
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+
+
+              </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+        <div class="table-responsive py-2">
+           
+          </div>
+          {% else %}
+          {% include 'dashboard_index.html' %}
+          {% endif%}
+          
+          {% endblock %}

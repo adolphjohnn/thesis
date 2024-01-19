@@ -1,0 +1,70 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+
+<div class="row">
+  <div class="col-md-4 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+              Information
+          </div>
+          <div class="card-body">
+              <marquee behavior="" direction="">
+                  <h3 class="my-4">New Northern Mindanao Colleges Inc.</h3>
+              </marquee>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-8 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+            Question and Answer details
+          </div>
+          <div class="card-body">
+              <div class="row">
+                <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>#</th>
+                          <th>Question</th>
+                          <th>Course</th>
+                          <th>Year</th>
+                          <th>DateCreated</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      
+  
+  
+                      {% for c in levelView %}
+                      <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{c.question}}</td>
+                          <td>{{c.course}}</td>
+                          <td>{{c.year_level}}</td>
+                          <td>{{c.created}}</td>
+                          <td><a href="/editView/{{c.code}}" class="btn btn-info">View</a></td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+
+
+              </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+        <div class="table-responsive py-2">
+           
+          </div>
+          {% else %}
+          {% include 'dashboard_index.html' %}
+          {% endif%}
+          
+          {% endblock %}

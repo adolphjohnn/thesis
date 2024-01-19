@@ -1,0 +1,51 @@
+{% load crispy_forms_tags %}
+<div>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Make Request
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input class="btn btn-info btn-block" type="submit" value="Make Request">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Orders Records
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Question</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>DateCreated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+    
+    
+                        {% for c in chats %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{c.quetion}}</td>
+                            <td>{{c.course}}</td>
+                            <td>{{c.year}}</td>
+                            <td>{{c.date}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

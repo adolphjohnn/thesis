@@ -1,0 +1,63 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+
+<div class="row">
+  <div class="col-md-4 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+              Information
+          </div>
+          <div class="card-body">
+              <marquee behavior="" direction="">
+                  <h3 class="my-4">New Northern Mindanao Colleges Inc.</h3>
+              </marquee>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-8 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+            Question and Answer details
+          </div>
+          <div class="card-body">
+              <div class="row">
+                <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          
+                          <th>Question Answers</th>
+                          <th>#</th>
+                          <th>Question</th>
+                          <th>Course</th>
+                          <th>Year</th>
+                          <th>DateCreated</th>
+                          <th>Action</th>
+                      </tr>
+                      
+
+                  </thead>
+                  <tbody>
+                      
+                   
+                  </tbody>
+
+
+              </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+        <div class="table-responsive py-2">
+           
+          </div>
+          {% else %}
+          {% include 'dashboard_index.html' %}
+          {% endif%}
+          
+          {% endblock %}

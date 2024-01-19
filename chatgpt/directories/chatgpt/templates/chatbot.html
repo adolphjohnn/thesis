@@ -1,0 +1,194 @@
+{% extends "./base.html" %}
+
+{% block title %} Northern Mindanao Colleges Inc. {% endblock %}
+
+{% block body %}
+
+
+<!-- Trigger/Open the Modal -->
+<div class="w3-container">
+    <h2>W3.CSS Modal</h2>
+    <p>Use w3-container classes to create different sections in the modal (e.g. header & footer).</p>
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button>
+  
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <header class="w3-container w3-teal"> 
+          <span onclick="document.getElementById('id01').style.display='none'" 
+          class="w3-button w3-display-topright">&times;</span>
+          <h2>Modal Header</h2>
+        </header>
+        <div class="w3-container">
+          <p>Some text..</p>
+          <p>Some text..</p>
+        </div>
+        <footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+    <div class="container1">
+        <div class="messenger-container">
+            <div class="messenger-header">School Chatbot</div>
+            <input id="r" type="text">
+
+            <div class="messenger-messages" id="messengerMessages">
+                <div class="message bot">Hello! How can I assist you today?</div>
+            </div>
+
+            <div class="messenger-input">
+                <input type="text" placeholder="Type your message..." id="userInput">
+                <button onclick="sendMessage()" class="btn btn-primary" id="myBtn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $('#myModal').modal('show');
+        });
+    </script>
+    <script>
+        course1 = document.getElementById('course1').value;
+        
+      
+       // Get the modal
+       var modal = document.getElementById("myModal");
+        
+       // Get the button that opens the modal
+       var btn = document.getElementById("myBtn");
+       
+       // Get the <span> element that closes the modal
+       var span = document.getElementsByClassName("close")[0];
+       
+       // When the user clicks the button, open the modal 
+       btn.onclick = function() {
+        course1 = document.getElementById('course1').value;
+        
+        
+
+         if(course1 == '2'){
+          
+          const userInput = document.getElementById('userInput').value;
+          const messengerMessages = document.getElementById('messengerMessages');
+  
+          // Append the user's message
+          const userMessageElem = document.createElement('div');
+          userMessageElem.classList.add('message', 'user');
+          userMessageElem.innerText = userInput;
+          messengerMessages.appendChild(userMessageElem);
+  
+          // Use AJAX to get the bot's response
+          $.ajax({
+              url: '/ask/',  // Endpoint at '/ask/'
+              type: 'POST',
+              data: { 'userInput': userInput },
+              success: function(response) {
+                  // Append bot's response
+                  const botMessageElem = document.createElement('div');
+                  botMessageElem.classList.add('message', 'bot');
+                  botMessageElem.innerText = response.bot_response;
+                  messengerMessages.appendChild(botMessageElem);
+              }
+          });
+  
+          // Clear the user's input
+          document.getElementById('userInput').value = '';
+  
+          // Auto scroll to the bottom
+          messengerMessages.scrollTop = messengerMessages.scrollHeight;
+ 
+         }else{
+          modal.style.display = "block";
+         }
+       }
+       
+       // When the user clicks on <span> (x), close the modal
+       span.onclick = function() {
+         modal.style.display = "none";
+       }
+       
+       // When the user clicks anywhere outside of the modal, close it
+       window.onclick = function(event) {
+         if (event.target == modal) {
+           modal.style.display = "none";
+         }
+       
+    }
+        </script>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            const messengerMessages = document.getElementById('messengerMessages');
+    
+            // Append the user's message
+            const userMessageElem = document.createElement('div');
+            userMessageElem.classList.add('message', 'user');
+            userMessageElem.innerText = userInput;
+            messengerMessages.appendChild(userMessageElem);
+    
+            // Use AJAX to get the bot's response
+            $.ajax({
+                url: '/ask/',  // Endpoint at '/ask/'
+                type: 'POST',
+                data: { 'userInput': userInput },
+                success: function(response) {
+                    // Append bot's response
+                    const botMessageElem = document.createElement('div');
+                    botMessageElem.classList.add('message', 'bot');
+                    botMessageElem.innerText = response.bot_response;
+                    messengerMessages.appendChild(botMessageElem);
+                }
+            });
+    
+            // Clear the user's input
+            document.getElementById('userInput').value = '';
+    
+            // Auto scroll to the bottom
+            messengerMessages.scrollTop = messengerMessages.scrollHeight;
+        }
+    </script>
+
+    
+    <script>
+        function sendMessage1() {
+            const course = document.getElementById('course').value;
+            const level = document.getElementById('level').value;
+            const combin = course+ ' - ' +level;
+            document.getElementById('course1').value = '2';
+            document.getElementById('level1').value = level;
+            $("#myModal").val(null).trigger("change");
+            const messengerMessages = document.getElementById('messengerMessages');
+    
+            // Append the user's message
+            const userMessageElem = document.createElement('div');
+            userMessageElem.classList.add('message', 'user');
+            userMessageElem.innerText = combin;
+            messengerMessages.appendChild(userMessageElem);
+                // Use AJAX to get the bot's response
+                $.ajax({
+                    url: '/ask/',  // Endpoint at '/ask/'
+                    type: 'POST',
+                    data: { 'userInput': userInput },
+                    success: function(response) {
+                        // Append bot's response
+                        const botMessageElem = document.createElement('div');
+                        botMessageElem.classList.add('message', 'bot');
+                        botMessageElem.innerText = response.bot_response;
+                        messengerMessages.appendChild(botMessageElem);
+                    }
+                });
+    
+            // Clear the user's input
+            document.getElementById('userInput').value = '';
+
+            // Auto scroll to the bottom
+            messengerMessages.scrollTop = messengerMessages.scrollHeight;
+        }
+    </script>
+
+    {% endblock %}
+    

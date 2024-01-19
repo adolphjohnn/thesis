@@ -1,0 +1,41 @@
+{
+    "messages": [
+          {
+               "role": "system",
+               "content": "You are an assistant to answer the scholarship"
+          },
+         {
+               "role": "user",
+                "content": "What Scholarship are available at our School?"
+         },
+        {
+             "role": "assistant",
+              "content": "T.E.S."
+        }
+ ]
+}
+{
+    "messages": [
+          {
+               "role": "system",
+               "content": "You are an assistant to answer the Office Hours"
+          },
+         {
+               "role": "user",
+                "content": ".	What time does the office for scholarship open?"
+         },
+        {
+             "role": "assistant",
+              "content": "8 am to 5pm"
+        }
+ ]
+}	
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-4 mt-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                Information
+            </div>
+            <div class="card-body">
+                <marquee behavior="" direction="">
+                    <h3 class="my-4">New Northern Mindanao Colleges Inc.</h3>
+                </marquee>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 mt-4">
+        <div class="card">
+            
+            <div class="card-header bg-info text-white">
+                Dashboard Statistics
+
+            </div> 
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class="text-decoration-none text-dark" href="">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <h5><a href={% url 'feedback' %}>Feedback </a><i class="fa fa-tasks"></i></h5>
+                                    <h3>{{ customer_count }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="text-decoration-none text-dark" href="">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <h5><a href={% url 'logs' %}>Logs </a><i class="fas fa-users"></i></h5>
+                                    <h3>{{ customer_count }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="text-decoration-none text-dark" href="">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <h5><a href={% url 'rate' %}>Rate </a><i class="fas fa-box"></i></h5>
+                                    <h3>{{ product_count }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="text-decoration-none text-dark" href=">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    
+                                
+                                    <h3><a> {{total}} </a><br><i class="fas fa-sync-alt fa-spin"></i></h3>
+                                    
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br>
+        
+        </div>
+    </div>
+</div>

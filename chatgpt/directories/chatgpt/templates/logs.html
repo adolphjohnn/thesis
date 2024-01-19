@@ -1,0 +1,108 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+
+<div class="row">
+  <div class="col-md-4 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+              Information
+          </div>
+          <div class="card-body">
+              <marquee behavior="" direction="">
+                  <h3 class="my-4">New Northern Mindanao Colleges Inc.</h3>
+              </marquee>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-8 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+            Question and Answer details
+          </div>
+          <form action="{% url 'search' %}" method="get" class="d-flex">
+            <input class="form-control me-2" type="text" name="query" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button type="button" class="btn btn-primary" onclick="printTable('courseTable')">Print</button>
+            <button type="button" class="btn btn-success" onclick="exportToExcel('courseTable')">Excel</button>
+          </form>
+          <div class="card-body">
+              <div class="row">
+                <table class="table table-striped" id="courseTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>DateCreated</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+    
+    
+                        {% for c in chats %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{c.question}}</td>
+                            <td>{{c.answer}}</td>
+                            <td>{{c.course}}</td>
+                            <td>{{c.year_level}}</td>
+                            <td>{{c.created}}</td>
+                            <td><a href="/editView/{{c.code}}" class="btn btn-info">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+    
+    
+                </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+        <div class="table-responsive py-2">
+           
+          </div>
+
+          <script>
+            // Function to print the table
+            function printTable(tableId) {
+                const printContent = document.getElementById(tableId).cloneNode(true);
+                const printWindow = window.open('', '_blank');
+                printWindow.document.body.appendChild(printContent);
+                printWindow.print();
+            }
+        
+            // Function to export the table to Excel
+            function exportToExcel(tableId) {
+                const table = document.getElementById(tableId);
+                const wsData = [['#', 'Question', 'Answer', 'Course', 'Year', 'DateCreated']];
+        
+                for (let i = 0; i < table.rows.length; i++) {
+                    const cells = table.rows[i].cells;
+                    wsData.push([cells[0].innerText, cells[1].innerText, cells[2].innerText, cells[3].innerText, cells[4].innerText, cells[5].innerText]);
+                }
+        
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.aoa_to_sheet(wsData);
+                XLSX.utils.book_append_sheet(wb, ws, 'Questions');
+        
+                XLSX.writeFile(wb, 'normi Q&A.xlsx');
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+          {% else %}
+          {% include 'dashboard_index.html' %}
+          {% endif%}
+          
+          {% endblock %}

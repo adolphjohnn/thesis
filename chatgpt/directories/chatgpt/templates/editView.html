@@ -1,0 +1,73 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+
+<div class="row">
+  <div class="col-md-4 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+              Information
+          </div>
+          <div class="card-body">
+              <marquee behavior="" direction="">
+                  <h3 class="my-4">New Northern Mindanao Colleges Inc.</h3>
+              </marquee>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-8 mt-4">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+            Logs details
+          </div>
+          <div class="card-body">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+
+                                <div class="form-group">
+                                    <input type="text" id="txtCodigo" name="txtCodigo" value="{{curso.code}}" class="form-control" placeholder="Código"
+                                        minlength="6" maxlength="6" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="txtNombre" name="txtNombre" value="{{curso.question}}" class="form-control" placeholder="Nombre"
+                                        maxlength="50" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="numCreditos" name="numCreditos" value="{{curso.answer}}" class="form-control" min="1" max="9"
+                                        value="1" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="numCreditos" name="numCreditos" value="{{curso.year_level}}" class="form-control" min="1" max="9"
+                                        value="1" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="numCreditos" name="numCreditos" value="{{curso.course}}" class="form-control" min="1" max="9"
+                                        value="1" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="numCreditos" name="numCreditos" value="{{curso.created}}" class="form-control" min="1" max="9"
+                                        value="1" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <a href="/deleteLogs/{{curso.code}}" class="btn btn-danger btnEliminacion">Delete</a></td>
+                                </div>
+
+   
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+        <div class="table-responsive py-2">
+           
+          </div>
+          {% else %}
+          {% include 'dashboard_index.html' %}
+          {% endif%}
+          
+          {% endblock %}
